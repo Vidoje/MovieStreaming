@@ -1,4 +1,4 @@
-package com.taurunium.moviestreaming;
+package com.taurunium.moviestreaming.models;
 
 public class Slide {
     private int image;

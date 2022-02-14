@@ -10,7 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieStreaming">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MovieDetailsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_movie_details"
+            android:theme="@style/Theme.MovieStreaming.NoActionBar" />
+        <activity
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
