@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.taurunium.moviestreaming">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,12 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieStreaming">
         <activity
+            android:name=".ui.MainActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"/>
+        <activity
             android:name=".ui.MovieDetailsActivity"
             android:exported="false"
             android:label="@string/title_activity_movie_details"
             android:theme="@style/Theme.MovieStreaming.NoActionBar" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.MoviePlayerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

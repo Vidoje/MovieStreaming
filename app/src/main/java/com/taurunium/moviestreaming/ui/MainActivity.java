@@ -17,6 +17,7 @@ import com.taurunium.moviestreaming.adapters.MovieItemClickListener;
 import com.taurunium.moviestreaming.R;
 import com.taurunium.moviestreaming.models.Slide;
 import com.taurunium.moviestreaming.adapters.SliderPagerAdapter;
+import com.taurunium.moviestreaming.utils.DataSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements MovieItemClickLis
     private TabLayout indicator;
 
     private ViewPager viewPager;
-    private RecyclerView rvMovies;
+    private RecyclerView rvMovies, rvMoviesWeek;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +39,16 @@ public class MainActivity extends AppCompatActivity implements MovieItemClickLis
         setContentView(R.layout.activity_main);
 
         initViews();
-
         initSlider();
-
-        initMovies();
+        initPopularMovies();
+        initWeekMovies();
     }
 
     private void initViews() {
         viewPager = (ViewPager) findViewById(R.id.slider_pager);
         indicator = (TabLayout) findViewById(R.id.indicator);
         rvMovies = (RecyclerView) findViewById(R.id.rvMovies);
+        rvMoviesWeek = (RecyclerView) findViewById(R.id.rvMoviesWeek);
     }
 
     private void initSlider() {
@@ -66,18 +67,16 @@ public class MainActivity extends AppCompatActivity implements MovieItemClickLis
         indicator.setupWithViewPager(viewPager, true);
     }
 
-    private void initMovies() {
-        List<Movie> lstMovies = new ArrayList<>();
-        lstMovies.add(new Movie("Mickey Mouse", R.drawable.mickey_mouse, R.drawable.batman));
-        lstMovies.add(new Movie("Bugs Bunny", R.drawable.dusko_dugousko, R.drawable.batman));
-        lstMovies.add(new Movie("Ninja Turtles", R.drawable.nindza_kornjace, R.drawable.batman));
-        lstMovies.add(new Movie("Donald Duck", R.drawable.donald_duck, R.drawable.batman));
-        lstMovies.add(new Movie("The Smurfs", R.drawable.strumpfovi, R.drawable.batman));
-
-        MovieAdapter movieAdapter = new MovieAdapter(this, lstMovies, this);
+    private void initPopularMovies() {
+        MovieAdapter movieAdapter = new MovieAdapter(this, DataSource.getPopularMovies(), this);
         rvMovies.setAdapter(movieAdapter);
         rvMovies.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+    }
 
+    private void initWeekMovies(){
+        MovieAdapter movieAdapter = new MovieAdapter(this, DataSource.getWeekMovies(), this);
+        rvMoviesWeek.setAdapter(movieAdapter);
+        rvMoviesWeek.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 
     @Override
